@@ -24,6 +24,12 @@ const ERROR_SAVE = "신청을 저장하지 못했어요. 다시 시도해 주세
 // 휴대폰 번호 규칙: 숫자 11자리
 const PHONE_RULE = /^\d{11}$/;
 
+// 휴대폰 번호 입력란에는 숫자만 들어간다: 숫자가 아닌 글자는 지우고, 11자리까지만 남긴다
+const PHONE_MAX = 11;
+function onlyPhoneDigits(value: string) {
+  return value.replace(/\D/g, "").slice(0, PHONE_MAX);
+}
+
 // 로딩 상태(?state=loading): 요약 · 입력란 자리에 회색 상자만 보여 준다
 export function ApplyLoading() {
   return (
@@ -125,7 +131,7 @@ export default function ApplyView() {
             inputMode="numeric"
             autoComplete="tel"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => setPhone(onlyPhoneDigits(e.target.value))}
             onBlur={() => setPhoneTouched(true)}
             error={phoneError}
           />
@@ -133,7 +139,8 @@ export default function ApplyView() {
         </section>
       </div>
       {/* 버튼 영역: 저장 실패 문구(버튼 위) · '신청하기' · '취소'(요금제 상세로) */}
-      <BottomCTA>
+      {/* 본문 아래 빈 공간은 오류 문구 + 버튼 2개 높이(tall)만큼 둬서 동의 줄 · 동의 오류 문구까지 보이게 한다 */}
+      <BottomCTA reserve="tall">
         {saveError && (
           <p role="alert" className="text-body-small-medium text-text-error">
             {saveError}

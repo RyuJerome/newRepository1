@@ -1,8 +1,8 @@
 "use client";
 
 // 신청 완료 화면 본문: 완료 표시 · 신청 내역 5줄 · '요금제 더 보기' 버튼을 그린다.
-import { useSyncExternalStore } from "react";
-import { useSearchParams } from "next/navigation";
+import { useEffect, useSyncExternalStore } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { getPlan, formatWon } from "@/lib/plans";
 import { countSubscriptions, getLastSubscription } from "@/lib/subscription";
 import Header from "../_components/Header";
@@ -31,6 +31,7 @@ export function CompleteLoading() {
 }
 
 export default function CompleteView() {
+  const router = useRouter();
   const state = readPageState(useSearchParams());
   const count = useSyncExternalStore(noopSubscribe, countSubscriptions, () => NOT_READY);
 
@@ -38,10 +39,17 @@ export default function CompleteView() {
   const subscription = count > 0 ? getLastSubscription() : null;
   const plan = subscription ? getPlan(subscription.plan_id) : undefined;
 
-  // 상태별 본문: 로딩(또는 신청 내역을 읽는 중) → 스켈레톤, 오류 → "확인 필요",
-  // 빈 상태 또는 저장된 신청이 없을 때 → "확인 필요", 그 밖에는 완료 화면
+  // 저장된 신청이 없는데 이 화면을 열면 요금제 목록으로 바꿔 보낸다(뒤로가기 기록에 남지 않음).
+  // 상태 확인용 주소(?state=loading · empty · error)는 보내지 않고 그대로 보여 준다
+  const noSubscription = state === "default" && count !== NOT_READY && !subscription;
+  useEffect(() => {
+    if (noSubscription) router.replace("/plans");
+  }, [noSubscription, router]);
+
+  // 상태별 본문: 로딩(또는 신청 내역을 읽는 중 · 목록으로 넘어가는 중) → 스켈레톤, 오류 → "확인 필요",
+  // 빈 상태 → "확인 필요", 그 밖에는 완료 화면
   let body;
-  if (state === "loading" || (state === "default" && count === NOT_READY)) {
+  if (state === "loading" || (state === "default" && count === NOT_READY) || noSubscription) {
     body = <CompleteLoading />;
   } else if (state === "error") {
     body = <StateMessage message={UNKNOWN_MESSAGE} tone="error" />;
@@ -75,7 +83,7 @@ export default function CompleteView() {
       {body}
       {/* 버튼 영역: '요금제 더 보기' → 요금제 목록. 완료 화면이 보일 때만 */}
       {state === "default" && subscription && (
-        <BottomCTA>
+        <BottomCTA reserve="short">
           <ButtonLink href="/plans">요금제 더 보기</ButtonLink>
         </BottomCTA>
       )}

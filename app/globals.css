@@ -1,6 +1,25 @@
 @import "tailwindcss";
 @import "./tokens.css";
 
+/* 모바일 기준 폭: 화면 폭이 넓어도 앱은 이 폭을 넘지 않는다 (레이아웃 치수, 이 한 곳에서만 정한다) */
+:root {
+  --layout-width: 390px;
+}
+
+/* 기준 폭 제한: 가로로 꽉 차되 기준 폭보다 넓어지지 않는다 (아래 고정 버튼 영역에도 씀) */
+@utility layout-width {
+  width: 100%;
+  max-width: var(--layout-width);
+}
+
+/* 앱 틀: 기준 폭 안에서 가운데 정렬하고, 화면 높이만큼 채운다 */
+@utility app-frame {
+  width: 100%;
+  max-width: var(--layout-width);
+  margin-inline: auto;
+  min-height: 100dvh;
+}
+
 @layer base {
   body {
     @apply bg-bg-surface text-text-primary font-sans;

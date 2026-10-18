@@ -72,7 +72,8 @@ export default function PlanDetailView() {
         </section>
       </div>
       {/* 신청 영역: 매달 내는 금액 + '구독 신청하기' 버튼(이 요금제 id를 들고 구독 신청 화면으로) */}
-      <BottomCTA>
+      {/* 본문 아래 빈 공간은 금액 줄 + 버튼 1개 높이(medium)만큼 둔다 */}
+      <BottomCTA reserve="medium">
         <div className="flex w-full items-center gap-12 pb-4">
           <p className="flex-1 text-body-small-medium text-text-secondary">매달 내는 금액</p>
           <p className="text-subtitle-bold text-text-primary">{formatWon(plan.monthly_price)}</p>
