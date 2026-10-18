@@ -9,8 +9,11 @@
       "passed_at": "2026-10-18T13:38:29.584Z"
     },
     "2": {
-      "status": "pending",
-      "retries": 0
+      "status": "passed",
+      "retries": 1,
+      "started_at": "2026-10-18T13:40:20.015Z",
+      "last_reason": "S2: 02-pages.md 4번째 줄에 /subscription/ 표기",
+      "passed_at": "2026-10-18T13:41:27.721Z"
     },
     "3": {
       "status": "pending",
