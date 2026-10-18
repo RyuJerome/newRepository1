@@ -23,7 +23,9 @@ docs/의 PRD·screens·Design·tokens와 reference/links.md를 읽어, 4개 화�
   - 완료 화면: '요금제 더 보기' → /plans (Make 근거), 뒤로 → /plans (사용자 결정)
   - OptionItem·통화/문자 행: 넣지 않음
   - 상태: 4개 화면 모두 `?state=loading|empty|error`로 렌더링. 로딩은 스켈레톤. 빈·에러 문구는 screens.md 문구, 없으면 "확인 필요". 신청 오류 4개는 PRD 문구 그대로
-  - 저장: sessionStorage, 코드는 lib/subscription.ts 한 곳
+  - 저장: Supabase subscriptions 테이블 (supabase/subscriptions.sql), 코드는 lib/subscription.ts 한 곳. 키는 .env.local의 NEXT_PUBLIC_SUPABASE_URL · NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY (사용자 결정, sessionStorage 대체)
+  - 신청 화면은 저장 후 받은 신청 번호(id)를 들고 router.replace("/complete?id=<id>")로 이동하고, 완료 화면은 그 번호로 1건만 다시 읽어 보여 준다. id가 없거나 찾지 못하면 /plans로 보낸다 (사용자 결정)
+  - 완료 화면의 신청자 이름은 가운데 글자를, 휴대폰 번호는 가운데 4자리를 가린다: 홍*동, 010-****-5678 (사용자 결정, 표기는 화면 링크 신청 완료 프레임)
   - 모바일 기준 폭: 앱 전체를 폭 390px 컨테이너 안에 가운데 정렬 (넓은 화면에서도 390보다 넓어지지 않음). 390은 레이아웃 치수로 app/globals.css의 `--layout-width: 390px;` 한 곳에만 정의 (사용자 결정)
   - 하단 버튼 영역이 있는 화면은 본문 아래에 그 높이만큼 여백을 둬서 끝까지 보이게 한다 (사용자 결정)
   - 저장된 신청이 없을 때 /complete를 열면 /plans로 보낸다 (사용자 결정)
