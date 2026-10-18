@@ -3,7 +3,7 @@
 import { codeFiles, read } from "../lib/common.mjs";
 import { checkForbidden } from "../lib/token-rules.mjs";
 
-export default {
+const gate = {
   id: "G13",
   name: "금지어",
   back: "4-2",
@@ -13,3 +13,5 @@ export default {
     return { ok: details.length === 0, details, back };
   },
 };
+
+export default gate;

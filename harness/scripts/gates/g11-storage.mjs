@@ -4,7 +4,7 @@ import { codeFiles, read, exists } from "../lib/common.mjs";
 
 const OWNER = "lib/subscription.ts";
 
-export default {
+const gate = {
   id: "G11",
   name: "저장 위치",
   back: "4-1",
@@ -23,3 +23,5 @@ export default {
     return { ok: details.length === 0, details, back };
   },
 };
+
+export default gate;

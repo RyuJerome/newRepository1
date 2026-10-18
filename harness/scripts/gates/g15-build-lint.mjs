@@ -3,7 +3,7 @@ import { sh } from "../lib/common.mjs";
 
 const lastLines = (s, n = 15) => s.trim().split("\n").slice(-n);
 
-export default {
+const gate = {
   id: "G15",
   name: "build · lint",
   back: "4-2",
@@ -16,3 +16,5 @@ export default {
     return { ok: details.length === 0, details };
   },
 };
+
+export default gate;

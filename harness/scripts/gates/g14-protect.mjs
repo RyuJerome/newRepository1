@@ -2,7 +2,7 @@
 //   git 변경(수정 · 추가 · 삭제)이 0개
 import { sh, PROTECTED } from "../lib/common.mjs";
 
-export default {
+const gate = {
   id: "G14",
   name: "원본 보호",
   back: "현재 단계",
@@ -13,3 +13,5 @@ export default {
     return { ok: details.length === 0, details };
   },
 };
+
+export default gate;

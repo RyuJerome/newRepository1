@@ -12,7 +12,7 @@ export function appRoutes() {
     });
 }
 
-export default {
+const gate = {
   id: "G1",
   name: "화면 수",
   back: "2",
@@ -28,3 +28,5 @@ export default {
     return { ok: details.length === 0, details };
   },
 };
+
+export default gate;

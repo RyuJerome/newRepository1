@@ -60,7 +60,7 @@ function checkPriceSource() {
   return d;
 }
 
-export default {
+const gate = {
   id: "G4",
   name: "★ 규칙 3 가격",
   back: "4-1",
@@ -70,3 +70,5 @@ export default {
     return { ok: d.length + src.length === 0, details: [...d, ...src], back: d.length ? "4-1" : "4-2" };
   },
 };
+
+export default gate;

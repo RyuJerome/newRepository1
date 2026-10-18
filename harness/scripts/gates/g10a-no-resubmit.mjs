@@ -1,7 +1,7 @@
 // G10a 재제출 방지: /complete 화면 코드(app/complete/**)에 "/apply"가 0번
 import { walk, read, scanSource, exists } from "../lib/common.mjs";
 
-export default {
+const gate = {
   id: "G10a",
   name: "재제출 방지",
   back: "4-2",
@@ -13,3 +13,5 @@ export default {
     return { ok: details.length === 0, details };
   },
 };
+
+export default gate;

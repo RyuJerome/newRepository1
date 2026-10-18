@@ -3,7 +3,7 @@ import { exists, read } from "../lib/common.mjs";
 
 const HEADINGS = ["## 1. 유저 스토리", "## 2. 판정 규칙", "## 3. 충돌표", "## 4. 결정표", "## 5. data-gate 계약", "## 6. 확인 필요"];
 
-export default {
+const gate = {
   id: "S1",
   name: "맥락 파일",
   back: "1",
@@ -15,3 +15,5 @@ export default {
     return { ok: details.length === 0, details };
   },
 };
+
+export default gate;

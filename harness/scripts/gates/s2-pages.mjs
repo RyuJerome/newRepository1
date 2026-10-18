@@ -2,7 +2,7 @@
 //    screens.md의 "## " 개수 = PRD 라우트 수 (2단계)
 import { exists, read, prdRoutes, screensHeadingCount } from "../lib/common.mjs";
 
-export default {
+const gate = {
   id: "S2",
   name: "화면 명세",
   back: "2",
@@ -18,3 +18,5 @@ export default {
     return { ok: details.length === 0, details };
   },
 };
+
+export default gate;

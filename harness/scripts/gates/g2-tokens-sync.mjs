@@ -2,7 +2,7 @@
 import { exists, read } from "../lib/common.mjs";
 import { generateTokensCss, TOKENS_CSS } from "../build-tokens.mjs";
 
-export default {
+const gate = {
   id: "G2",
   name: "토큰 동기화",
   back: "3",
@@ -12,3 +12,5 @@ export default {
     return { ok: same, details: same ? [] : [`${TOKENS_CSS}가 tokens.json과 다름 (직접 수정 또는 tokens.json 변경)`] };
   },
 };
+
+export default gate;

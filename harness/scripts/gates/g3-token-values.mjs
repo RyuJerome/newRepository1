@@ -3,7 +3,7 @@
 import { codeFiles, read } from "../lib/common.mjs";
 import { checkTokenText } from "../lib/token-rules.mjs";
 
-export default {
+const gate = {
   id: "G3",
   name: "토큰 밖 값",
   back: "4-2",
@@ -14,3 +14,5 @@ export default {
     return { ok: details.length === 0, details };
   },
 };
+
+export default gate;
