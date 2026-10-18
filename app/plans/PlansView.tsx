@@ -14,6 +14,11 @@ import { readPageState, UNKNOWN_MESSAGE } from "../_components/pageState";
 // 필터 칩 4개 (화면 링크 기준). 누르면 선택 표시만 바뀌고 카드는 걸러지지 않는다
 const CHIPS = ["전체", "베이직", "스탠다드", "프리미엄"];
 
+// 카드 보여 주는 순서: 추천 요금제를 맨 위에, 나머지는 매달 내는 금액 낮은 순
+const sortedPlans = [...plans].sort(
+  (a, b) => Number(b.recommended) - Number(a.recommended) || a.monthly_price - b.monthly_price,
+);
+
 // 로딩 상태(?state=loading): 칩 · 제목 · 카드 자리에 회색 상자만 보여 준다
 export function PlansLoading() {
   return (
@@ -49,9 +54,9 @@ export default function PlansView() {
           </div>
           {/* 목록 안내 문구 (screens.md) */}
           <h2 className="text-heading-h3 text-text-primary">나에게 맞는 요금제를 골라보세요</h2>
-          {/* 요금제 카드 4개: 매달 내는 금액 낮은 순 (p01 → p04) */}
+          {/* 요금제 카드 4개: 추천 요금제 먼저, 나머지는 매달 내는 금액 낮은 순 */}
           <div className="flex w-full flex-col gap-8">
-            {plans.map((plan) => (
+            {sortedPlans.map((plan) => (
               <PlanCard key={plan.id} plan={plan} />
             ))}
           </div>
