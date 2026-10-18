@@ -53,7 +53,7 @@ export default function PlansView() {
             ))}
           </div>
           {/* 목록 안내 문구 (screens.md) */}
-          <h2 className="text-heading-h3 text-text-primary">나에게 맞는 요금제를 골라보세요</h2>
+          <h2 className="text-heading-h3 text-text-primary">나에게 맞는<br />요금제를 골라보세요</h2>
           {/* 요금제 카드 4개: 추천 요금제 먼저, 나머지는 매달 내는 금액 낮은 순 */}
           <div className="flex w-full flex-col gap-8">
             {sortedPlans.map((plan) => (
