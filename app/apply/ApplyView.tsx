@@ -79,23 +79,23 @@ export default function ApplyView() {
   const saveError = showAll || saveFailed ? ERROR_SAVE : null;
 
   // 이름 · 휴대폰 번호(숫자 11자리) · 동의가 모두 채워져야 '신청하기'가 눌린다
-  const canSubmit =name.trim() !== "" && PHONE_RULE.test(phone) && agreed && !submitting;
+  const canSubmit = name.trim() !== "" && PHONE_RULE.test(phone) && agreed && !submitting;
   const after = priceAfterLabel(plan);
 
-  // '신청하기': 신청 1건을 저장하고 신청 완료 화면으로 바꿔 이동한다(뒤로가기로 이 화면에 돌아오지 않게).
+  // '신청하기': 신청 1건을 서버(Supabase)에 저장하고, 돌려받은 신청 번호를 들고 신청 완료 화면으로 바꿔 이동한다
+  // (뒤로가기로 이 화면에 돌아오지 않게). 저장하는 동안은 버튼을 막아 두 번 눌러도 한 번만 저장된다.
   // 저장이 실패하면 화면에 남아 저장 실패 문구를 보여 준다
-  function handleSubmit() {
+  async function handleSubmit() {
     if (!plan || !canSubmit) return;
     setSubmitting(true);
     setSaveFailed(false);
     try {
-      saveSubscription({ name, phone, plan_id: plan.id, agreed_privacy: agreed });
+      const saved = await saveSubscription({ name, phone, plan_id: plan.id, agreed_privacy: agreed });
+      router.replace(`/complete?id=${encodeURIComponent(saved.id)}`);
     } catch {
       setSaveFailed(true);
       setSubmitting(false);
-      return;
     }
-    router.replace("/complete");
   }
 
   return (
