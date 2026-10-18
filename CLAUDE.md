@@ -69,11 +69,13 @@ G1 화면 수 · G2 토큰 동기화 · G3 토큰 밖 값 · G4★ 가격(규칙
 3. 전부 O면 `stage.mjs approve` 후 마지막 커밋. X가 있으면 `stage.mjs fail 5 --back 4-2 --human --reason "..."`으로 4단계로 (자동 복귀 횟수에 세지 않음).
 
 ## 6. 커밋과 이어 하기
-- 브랜치는 main 하나. 새 브랜치·worktree·push 금지.
+- 브랜치는 main 하나. 새 브랜치·worktree 금지.
+- push는 원격 저장소 github.com/Highstand/uplus-plan-claude(origin)의 main으로만, `git push origin main`만 허용한다 (사용자 결정). 강제 push 금지. 에이전트는 push하지 않고, 메인 대화가 사용자가 요청할 때만 한다.
 - 단계 게이트가 통과할 때마다 메인 대화가 커밋 1개: `harness: <단계> <이름> 통과`
 - "이어서 해줘": harness/state.json과 마지막 커밋을 읽고(`node harness/scripts/stage.mjs status`), 통과하지 못한 첫 단계부터 시작한다.
 
 ## 7. 훅이 막는 것 (.claude/settings.json)
+- `git push origin main` 말고의 push, 강제 push, 새 브랜치, worktree, reset --hard, git clean
 - 현재 단계의 편집 범위 밖 쓰기 (harness/state.json의 단계 기준)
 - docs/, reference/, .claude/agents/page-splitter.md, .claude/skills/code-comments/ 쓰기
 - app/tokens.css 직접 수정 (3단계 스크립트만)
