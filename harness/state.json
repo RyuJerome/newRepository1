@@ -16,8 +16,10 @@
       "passed_at": "2026-10-18T13:41:27.721Z"
     },
     "3": {
-      "status": "pending",
-      "retries": 0
+      "status": "passed",
+      "retries": 0,
+      "started_at": "2026-10-18T13:41:27.773Z",
+      "passed_at": "2026-10-18T13:41:27.865Z"
     },
     "5": {
       "status": "pending",
