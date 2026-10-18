@@ -110,12 +110,22 @@ const RAW_PATTERNS = [
 ];
 const CSS_UNIT = [/(?<![\w-])\d*\.?\d+(?:px|rem|em)\b/g, "CSS 직접 단위 값(px · rem · em)"];
 
+// G3 예외 1개 (사용자 결정): 모바일 기준 폭 390은 토큰이 아니라 레이아웃 치수.
+//   app/globals.css에서 "--layout-width: 390px;" 정의 1번만 허용한다. 그 밖의 390 · px는 그대로 위반.
+export const LAYOUT_WIDTH_FILE = "app/globals.css";
+const LAYOUT_WIDTH_DEF = /--layout-width:\s*390px\s*;/g;
+
 // 파일 내용 검사. fragment=true면 Edit의 일부 조각(문자열이 잘려 있을 수 있음)
 export function checkTokenText(text, file, { fragment = false } = {}) {
   const A = allowed();
   const out = [];
   const { code, strings } = scanSource(text);
-  const src = fragment ? text : code;
+  let src = fragment ? text : code;
+  if (file === LAYOUT_WIDTH_FILE) {
+    const defs = src.match(LAYOUT_WIDTH_DEF) ?? [];
+    if (defs.length > 1) out.push(`${file} --layout-width 정의는 1번만 허용 (${defs.length}번)`);
+    src = src.replace(LAYOUT_WIDTH_DEF, (m) => m.replace("390px", "var(--layout-width)"));
+  }
   const lineOf = (idx) => src.slice(0, idx).split("\n").length;
   const patterns = file.endsWith(".css") ? [...RAW_PATTERNS, CSS_UNIT] : RAW_PATTERNS;
   for (const [re, why] of patterns) {

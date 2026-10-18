@@ -22,7 +22,7 @@
       "passed_at": "2026-10-18T13:41:27.865Z"
     },
     "5": {
-      "status": "passed",
+      "status": "pending",
       "retries": 0,
       "started_at": "2026-10-18T13:49:38.462Z",
       "passed_at": "2026-10-18T13:52:54.963Z"
@@ -34,10 +34,11 @@
       "passed_at": "2026-10-18T13:42:27.790Z"
     },
     "4-2": {
-      "status": "passed",
+      "status": "pending",
       "retries": 0,
       "started_at": "2026-10-18T13:42:27.855Z",
-      "passed_at": "2026-10-18T13:49:35.641Z"
+      "passed_at": "2026-10-18T13:49:35.641Z",
+      "last_reason": "사람 승인 X: 390 모바일 컨테이너, 신청 화면 하단 가림, 신청 없을 때 /complete → /plans, 휴대폰 숫자만 입력"
     }
   }
 }

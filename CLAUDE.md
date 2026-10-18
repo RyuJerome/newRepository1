@@ -24,6 +24,11 @@ docs/의 PRD·screens·Design·tokens와 reference/links.md를 읽어, 4개 화�
   - OptionItem·통화/문자 행: 넣지 않음
   - 상태: 4개 화면 모두 `?state=loading|empty|error`로 렌더링. 로딩은 스켈레톤. 빈·에러 문구는 screens.md 문구, 없으면 "확인 필요". 신청 오류 4개는 PRD 문구 그대로
   - 저장: sessionStorage, 코드는 lib/subscription.ts 한 곳
+  - 모바일 기준 폭: 앱 전체를 폭 390px 컨테이너 안에 가운데 정렬 (넓은 화면에서도 390보다 넓어지지 않음). 390은 레이아웃 치수로 app/globals.css의 `--layout-width: 390px;` 한 곳에만 정의 (사용자 결정)
+  - 하단 버튼 영역이 있는 화면은 본문 아래에 그 높이만큼 여백을 둬서 끝까지 보이게 한다 (사용자 결정)
+  - 저장된 신청이 없을 때 /complete를 열면 /plans로 보낸다 (사용자 결정)
+  - 신청 화면 휴대폰 번호 입력란에는 숫자만 입력된다 (사용자 결정)
+  - 위 4개는 01-context.md 작성 뒤에 정한 결정이다. 01-context.md와 다르면 이 절이 우선한다.
 
 ## 2. 파이프라인
 | 단계 | 담당 | 입력 | 출력 (편집 허용 범위) | 단계 게이트 |
@@ -42,6 +47,7 @@ docs/의 PRD·screens·Design·tokens와 reference/links.md를 읽어, 4개 화�
 ## 3. 자동 게이트 (`node harness/scripts/check-all.mjs [--stage N]`)
 G1 화면 수 · G2 토큰 동기화 · G3 토큰 밖 값 · G4★ 가격(규칙 3) · G5★ 속도(규칙 5) · G10a /complete에 /apply 0번 · G11 저장 위치 · G13 금지어 · G14 원본 보호 · G15 build·lint
 (정확한 기준은 harness/scripts/gates/*.mjs 주석과 01-context.md)
+- G3 예외는 1개뿐: app/globals.css의 `--layout-width: 390px;` 정의 1번 (harness/scripts/lib/token-rules.mjs). 화면 코드에서 390 · [ ] 임의 값은 그대로 위반.
 
 ## 4. 실패와 복귀
 - G1 → 2 / G2 → 3 / G3·G4·G5·G10a·G11·G13·G15 → 4 (데이터 원인이면 4-1, 화면 원인이면 4-2) / G14 → 해당 단계
