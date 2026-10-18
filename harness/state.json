@@ -3,8 +3,10 @@
   "approved": false,
   "stages": {
     "1": {
-      "status": "pending",
-      "retries": 0
+      "status": "passed",
+      "retries": 0,
+      "started_at": "2026-10-18T13:36:26.497Z",
+      "passed_at": "2026-10-18T13:38:29.584Z"
     },
     "2": {
       "status": "pending",
