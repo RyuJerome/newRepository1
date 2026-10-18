@@ -17,6 +17,7 @@ docs/의 PRD·screens·Design·tokens와 reference/links.md를 읽어, 4개 화�
 - PRD에 없는 화면 요소는 화면 링크를 따르고, 데이터·기능은 지어내지 않는다. 모르면 "확인 필요".
 - 결정·충돌의 상세 표와 근거는 harness/01-context.md가 기준이다. 요약:
   - 라우트: /plans, /plans/[id], /apply, /complete (PRD)
+  - 루트(/)는 page 없이 next.config.ts의 redirects로 /plans에 보낸다 (사용자 결정, G1 화면 수 4개 유지)
   - 요금제: p01~p04 (PRD), 매달 내는 금액 낮은 순. 추천 Tag는 p03 1개 (사용자 결정·피그마 화면과 맞춤)
   - 신청 입력: 이름·휴대폰 번호·개인정보 동의 (PRD). 뒤로 갈 때 입력값 유지 안 함
   - 필터 칩: 전체·베이직·스탠다드·프리미엄 (화면 링크 4145:3129). 누르면 선택 표시만 바뀜, 필터링 안 함 (사용자 결정, PRD 대체)
