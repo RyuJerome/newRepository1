@@ -1,0 +1,30 @@
+{
+  "current": null,
+  "approved": false,
+  "stages": {
+    "1": {
+      "status": "pending",
+      "retries": 0
+    },
+    "2": {
+      "status": "pending",
+      "retries": 0
+    },
+    "3": {
+      "status": "pending",
+      "retries": 0
+    },
+    "5": {
+      "status": "pending",
+      "retries": 0
+    },
+    "4-1": {
+      "status": "pending",
+      "retries": 0
+    },
+    "4-2": {
+      "status": "pending",
+      "retries": 0
+    }
+  }
+}
