@@ -32,8 +32,10 @@
       "passed_at": "2026-10-18T13:42:27.790Z"
     },
     "4-2": {
-      "status": "pending",
-      "retries": 0
+      "status": "passed",
+      "retries": 0,
+      "started_at": "2026-10-18T13:42:27.855Z",
+      "passed_at": "2026-10-18T13:49:35.641Z"
     }
   }
 }
