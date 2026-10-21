@@ -1,6 +1,6 @@
 {
   "current": null,
-  "approved": false,
+  "approved": true,
   "stages": {
     "1": {
       "status": "passed",
@@ -24,8 +24,8 @@
     "5": {
       "status": "passed",
       "retries": 0,
-      "started_at": "2026-10-18T15:21:16.305Z",
-      "passed_at": "2026-10-18T15:22:17.811Z"
+      "started_at": "2026-10-21T05:39:37.029Z",
+      "passed_at": "2026-10-21T05:55:34.804Z"
     },
     "4-1": {
       "status": "passed",
@@ -41,5 +41,6 @@
       "passed_at": "2026-10-18T15:21:16.244Z",
       "last_reason": "사람 지적: /plans 헤드라인을 '나에게 맞는' / '요금제를 골라보세요' 두 줄로"
     }
-  }
+  },
+  "approved_at": "2026-10-21T05:55:34.843Z"
 }
